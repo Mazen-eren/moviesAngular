@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="card shadow mb-4">
+    <div class="card-body">
+      <h1>Liste des films</h1>
+      <table width="100%">
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>Titre</th>
+            <th>Genre</th>
+            <th>Réalisateur</th>
+            <th>Date de sortie</th>
+            <th>Durée</th>
+            <th>Note</th>
+            <th>Avis</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (v of tab_film; track v.id) {
+            <tr>
+              <td>{{ v.id }}</td>
+              <td>{{ v.titre | uppercase }}</td>
+              <td>{{ v.genre }}</td>
+              <td>{{ v.realiz.nom | uppercase }}</td>
+              <td>{{ v.dateSortie | date: 'dd/MM/yyyy' }}</td>
+              <td>{{ convertDuree(v.duree) }}</td>
+              <td [ngStyle]="v.note >= 8 ? styleAvis : {}">
+                {{ v.note | number: '1.1' }}
+              </td>
+              <td [ngStyle]="v.note >= 8 ? styleAvis : {}">
+                @if (v.note >= 8) {
+                  A voir absolument
+                } @else if (v.note >= 6) {
+                  Bien
+                } @else {
+                  -
+                }
+              </td>
+              <td>
+                <a
+                  class="btn btn-warning"
+                  [routerLink]="['/updateFilm', v.id]"
+                >
+                  <img src="edit.png" height="32" width="32" />
+                </a>
+                <a class="btn btn-danger" (click)="suppFilm(v)">
+                  <img
+                    src="delete.png"
+                    height="32"
+                    width="32"
+                    alt="Supprimer"
+                  />
+                </a>
+              </td>
+            </tr>
+          }
+          @empty {
+            <tr>
+              <td colspan="9">Aucun film</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

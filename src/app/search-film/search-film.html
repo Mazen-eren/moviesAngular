@@ -1,0 +1,127 @@
+<div class="container">
+  <div class="card shadow mb-4">
+    <div class="card-body">
+      <h1>Liste des films</h1>
+
+      <form name="f1">
+        Choisir un critère de recherche :
+        <input
+          type="radio"
+          [(ngModel)]="critere"
+          (change)="onCritereChange()"
+          name="critere"
+          value="titre"
+        />
+        par titre
+        <input
+          type="radio"
+          [(ngModel)]="critere"
+          (change)="onCritereChange()"
+          name="critere"
+          value="realiz"
+        />
+        par réalisateur
+        <input
+          type="radio"
+          [(ngModel)]="critere"
+          (change)="onCritereChange()"
+          name="critere"
+          value="genre"
+        />
+        par genre
+      </form>
+      <br />
+
+      <form name="f2">
+        @switch (critere) {
+          @case ('titre') {
+            <div class="form-group row mb-3">
+              <label for="saisieTitre" class="col-sm-3 col-form-label"
+                >Titre du film à chercher :</label
+              >
+              <div class="col-sm-4">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="saisieTitre"
+                  #titreFilm
+                  (keyup)="chercherParTitre(titreFilm.value)"
+                />
+              </div>
+            </div>
+          }
+          @case ('realiz') {
+            <div class="form-group row mb-3">
+              <label class="col-sm-4 col-form-label"
+                >Réalisateur du film à chercher :</label
+              >
+              <div class="col-sm-4">
+                <select
+                  class="form-control"
+                  id="realizNumRech"
+                  name="realizNumRech"
+                  [(ngModel)]="realizNumRech"
+                  (change)="chercherParRealiz()"
+                >
+                  <option [value]="0">Tous</option>
+                  @for (r of list_realiz; track r.num) {
+                    <option [value]="r.num">{{ r.num }} - {{ r.nom }}</option>
+                  }
+                </select>
+              </div>
+            </div>
+          }
+          @case ('genre') {
+            <div class="form-group row mb-3">
+              <label for="saisieGenre" class="col-sm-3 col-form-label"
+                >Genre du film à chercher :</label
+              >
+              <div class="col-sm-4">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="saisieGenre"
+                  #genreFilm
+                  (keyup)="chercherParGenre(genreFilm.value)"
+                />
+              </div>
+            </div>
+          }
+        }
+      </form>
+
+      <br />
+      <table width="100%">
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>Titre</th>
+            <th>Genre</th>
+            <th>Réalisateur</th>
+            <th>Date de sortie</th>
+            <th>Durée</th>
+            <th>Note</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (v of list_film; track v.id) {
+            <tr>
+              <td>{{ v.id }}</td>
+              <td>{{ v.titre | uppercase }}</td>
+              <td>{{ v.genre }}</td>
+              <td>{{ v.realiz.nom | uppercase }}</td>
+              <td>{{ v.dateSortie | date: 'dd/MM/yyyy' }}</td>
+              <td>{{ convertDuree(v.duree) }}</td>
+              <td>{{ v.note | number: '1.1' }}</td>
+            </tr>
+          }
+          @empty {
+            <tr>
+              <td colspan="7">Aucun film</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

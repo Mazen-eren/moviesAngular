@@ -1,0 +1,83 @@
+<div class="container">
+  <div>
+    <h2>Modifier un film</h2>
+  </div>
+  <form>
+    <div class="col-sm-2 col-md-2 col-lg-2">
+      <label>ID</label>
+      <input
+        readonly
+        type="number"
+        name="id"
+        class="form-control"
+        [(ngModel)]="filmCourant.id"
+      />
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <label>Titre</label>
+      <input
+        type="text"
+        name="titre"
+        class="form-control"
+        [(ngModel)]="filmCourant.titre"
+      />
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <label>Genre</label>
+      <select
+        class="form-control form-control-lg"
+        [(ngModel)]="filmCourant.genre"
+        name="genre"
+      >
+        @for (g of tab_genre; track g) {
+          <option [value]="g">{{ g }}</option>
+        }
+      </select>
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <label>Date de sortie</label>
+      <input
+        type="date"
+        name="dateSortie"
+        class="form-control"
+        [ngModel]="filmCourant.dateSortie | date:'yyyy-MM-dd'"
+        (ngModelChange)="filmCourant.dateSortie = $event"
+      />
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <label>Réalisateur</label>
+      <select
+        class="form-control form-control-lg"
+        [(ngModel)]="numModifie"
+        name="numModifie"
+      >
+        @for (d of directors; track d.num) {
+          <option [value]="d.num">{{ d.nom }}</option>
+        }
+      </select>
+    </div>
+    <div class="col-sm-2 col-md-2 col-lg-2">
+      <label>Durée</label>
+      <input
+        type="number"
+        name="duree"
+        class="form-control"
+        [(ngModel)]="filmCourant.duree"
+      />
+    </div>
+    <div class="col-sm-2 col-md-2 col-lg-2">
+      <label>Note</label>
+      <input
+        type="number"
+        name="note"
+        class="form-control"
+        [(ngModel)]="filmCourant.note"
+      />
+    </div>
+    <div class="mt-2">
+      <button type="submit" (click)="modifFilm()" class="btn btn-success">
+        Modifier
+      </button>
+    </div>
+  </form>
+</div>

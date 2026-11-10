@@ -1,0 +1,31 @@
+<div class="container"> 
+    <div> 
+        <h2>Modifier un réalisateur</h2>         
+    </div> 
+    <form> 
+    <div class="col-sm-2 col-md-2 col-lg-2"> 
+        <label>Numéro</label> 
+        <input readonly type="number" name="num" class="form-control" 
+[(ngModel)]="realizCourant.num"> 
+    </div> 
+    <div class="col-sm-4 col-md-4 col-lg-4"> 
+        <label>Nom</label> 
+        <input type="text" name="nom" class="form-control" 
+[(ngModel)]="realizCourant.nom"> 
+    </div> 
+    <div class="col-sm-4 col-md-4 col-lg-4"> 
+        <label>Date de naissance</label> 
+        <input type="date" name="dateNaiss" class="form-control" 
+        [ngModel]="realizCourant.dateNaiss | date:'yyyy-MM-dd'" (ngModelChange)="realizCourant.dateNaiss = $event"> 
+    </div> 
+    <div class="col-sm-4 col-md-4 col-lg-4"> 
+        <label>Pays</label> 
+        <input type="text" name="pays" class="form-control" 
+[(ngModel)]="realizCourant.pays"> 
+    </div> 
+    <div class="mt-2"> 
+        <button type="submit" (click)="modifRealiz()" class="btn btn-success">Modifier  
+        </button> 
+    </div> 
+    </form> 
+</div> 

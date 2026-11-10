@@ -1,0 +1,30 @@
+<div class="container">
+<h2>Ajouter un réalisateur</h2>
+
+<form>
+<div class="col-sm-2 col-md-2 col-lg-2">
+<label>Numéro</label>
+<input type="number" class="form-control" [(ngModel)]="newRealiz.num"
+name="num">
+</div>
+<div class="col-sm-4 col-md-4 col-lg-4">
+<label>Nom</label>
+<input type="text" class="form-control" [(ngModel)]="newRealiz.nom"
+name="nom">
+</div>
+<div class="col-sm-4 col-md-4 col-lg-4">
+<label>Date de naissance</label>
+<input type="date" class="form-control" [(ngModel)]="newRealiz.dateNaiss"
+name="dateNaiss">
+</div>
+<div class="col-sm-4 col-md-4 col-lg-4">
+<label>Pays</label>
+<input type="text" class="form-control" [(ngModel)]="newRealiz.pays"
+name="pays">
+</div>
+<div class="mt-2">
+<button type="submit" class="btn btn-success" (click)="ajouterRealiz()">
+Ajouter</button>
+</div>
+</form>
+</div>

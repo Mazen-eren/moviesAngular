@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="card shadow mb-4">
+    <div class="card-body">
+      <h1>Liste des réalisateurs</h1>
+      <table width="100%">
+        <thead>
+          <tr>
+            <th>N°</th>
+            <th>Nom</th>
+            <th>Date de naissance</th>
+            <th>Pays</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (r of tab_realiz; track r.num) {
+            <tr>
+              <td>{{ r.num }}</td>
+              <td>{{ r.nom | uppercase }}</td>
+              <td>{{ r.dateNaiss | date: 'dd/MM/yyyy' }}</td>
+              <td>{{ r.pays }}</td>
+              <td>
+                <a
+                  class="btn btn-warning"
+                  [routerLink]="['/updateDirector', r.num]"
+                >
+                  <img src="edit.png" height="32" width="32" />
+                </a>
+                <a class="btn btn-danger" (click)="suppRealiz(r)">
+                  <img
+                    src="delete.png"
+                    height="32"
+                    width="32"
+                    alt="Supprimer"
+                  />
+                </a>
+              </td>
+            </tr>
+          }
+          @empty {
+            <tr>
+              <td colspan="5">Aucun réalisateur</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
